@@ -1,0 +1,37 @@
+# ATAC-seq R 包版本锁定
+
+[core_packages]
+DESeq2 = ">=1.38.0"
+ChIPseeker = ">=1.34.0"
+GenomicRanges = ">=1.50.0"
+rtracklayer = ">=1.58.0"
+clusterProfiler = ">=4.10.0"
+org.Hs.eg.db = ">=3.16.0"
+TxDb.Hsapiens.UCSC.hg38.knownGene = ">=3.16.0"
+apeglm = ">=1.14.0"
+tidyverse = ">=2.0.0"
+ggplot2 = ">=3.4.0"
+ComplexHeatmap = ">=2.14.0"
+pheatmap = ">=1.0.12"
+RColorBrewer = ">=1.1.3"
+ggrepel = ">=0.9.3"
+enrichplot = ">=1.18.0"
+patchwork = ">=1.1.2"
+
+[system_requirements]
+fastqc = ">=0.11.9"
+trimmomatic = ">=0.39"
+bwa = ">=0.7.17"
+samtools = ">=1.12"
+macs2 = ">=2.2.7.1"
+bedtools = ">=2.30.0"
+multiqc = ">=1.11"
+
+[genome_annotations]
+# 人类
+org.Hs.eg.db = "Gene annotation"
+TxDb.Hsapiens.UCSC.hg38.knownGene = "Transcript annotation (hg38)"
+
+# 小鼠 (可选)
+# org.Mm.eg.db = "Gene annotation"
+# TxDb.Mmusculus.UCSC.mm10.knownGene = "Transcript annotation (mm10)"

@@ -1,0 +1,44 @@
+# DNA Methylation R 包版本锁定
+
+[core_packages]
+methylKit = ">=1.22.0"
+DSS = ">=2.46.0"
+bsseq = ">=1.30.0"
+GenomicRanges = ">=1.50.0"
+rtracklayer = ">=1.58.0"
+ChIPseeker = ">=1.34.0"
+annotatr = ">=1.22.0"
+clusterProfiler = ">=4.10.0"
+org.Hs.eg.db = ">=3.16.0"
+TxDb.Hsapiens.UCSC.hg38.knownGene = ">=3.16.0"
+tidyverse = ">=2.0.0"
+ggplot2 = ">=3.4.0"
+ComplexHeatmap = ">=2.14.0"
+pheatmap = ">=1.0.12"
+RColorBrewer = ">=1.1.3"
+patchwork = ">=1.1.2"
+
+[system_requirements]
+bismark = ">=0.23.0"
+bowtie2 = ">=2.4.5"
+samtools = ">=1.12"
+
+[genome_annotations]
+# 人类
+org.Hs.eg.db = "Gene annotation"
+TxDb.Hsapiens.UCSC.hg38.knownGene = "Transcript annotation (hg38)"
+
+# 小鼠 (可选)
+# org.Mm.eg.db = "Gene annotation"
+# TxDb.Mmusculus.UCSC.mm10.knownGene = "Transcript annotation (mm10)"
+
+[analysis_parameters]
+# DMR 筛选默认参数
+fdr_cutoff = 0.05
+meth_diff_cutoff = 0.25  # 25%
+min_cpg_sites = 5
+min_dmr_length = 100  # bp
+
+# 甲基化提取参数
+min_coverage = 10
+max_coverage_percentile = 99.9
