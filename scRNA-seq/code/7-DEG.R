@@ -224,42 +224,7 @@ scatterplot3d(tmp[,1:3],color=col,
 legend("topright",c('2MWT','15MWT','26MWT'),
        fill=c('purple','orange','green'),box.col=NA,cex=0.7)
 
-###文章中PCA显示MIA和IAC在转录组水平上非常接近
-##我这里显示的是IAC和AIS更为接近，倒是和前面的韦恩图对应上了
-##但是这更能说明IAC是最终状态啊，期间的MIA是中间状态，感觉也是可以解释的
 
-
-
-
-###两组差异分析共显示dotplot图####
-#假设我们有某个癌症的组织样本，cancer vs normal得到癌变后差异表达蛋白，而同样的。我们也去取血液的样本，检测血液中蛋白的变化，找到差异蛋白，这个时候就可以将这两个数据合在一起比较，比如某些基因在癌组织和血液中变化一致，可以认为他们是正常相关的，通过这样的思路我们可以确定某些标志物，也就是血液能够代替活检的相关蛋白筛选。
-#IAC_vs_MIA,MIA_vs_AIS
-table(Idents(sce))
-as.data.frame(table(Idents(sce)))
-
-IACMIA = all_markers_sig[[1]]
-MIAAIS = all_markers_sig[[3]]
-
-ids=intersect(rownames(IACMIA),
-              rownames(MIAAIS))
-library(dplyr)
-library(magrittr)
-###数量太多了，随机选取100个，不具有实际意义，可以按照绝对值来挑选
-#dat = IACMIA[ids,]
-#top_100 <- dat %>% arrange(desc(abs(avg_log2FC))) %>% head(100)
-id = sample(ids,200)
-
-###这里又出现了另一个问题，要按照每个细胞亚群的差异基因来分组group,6个主要亚群
-sce.markers = read.csv('../4-plot/sce.markers.csv',row.names = 1)
-markergene = sce.markers[sce.markers$gene %in% id,]
-##有的基因是不同的细胞亚群中是重复的(注意：可以自己根据实际意义来选择去掉哪一项，或者删掉重复基因)
-markergene = markergene[!duplicated(markergene$gene),]
-df= data.frame(
-  IACMIA = IACMIA[markergene$gene,'avg_log2FC'],
-  MIAAIS = MIAAIS[markergene$gene,'avg_log2FC'],
-  gene = markergene$gene,
-  celltype = markergene$cluster
-)
 
 
 library(ggpubr)

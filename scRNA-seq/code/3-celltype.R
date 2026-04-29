@@ -20,10 +20,6 @@
 # immune (CD45+,PTPRC), epithelial/cancer (EpCAM+,EPCAM), 
 # stromal (CD10+,MME,fibo or CD31+,PECAM1,endo) 
 
-
-#####注释亚群
-#通常我们第一层次降维聚类分群：immune (CD45+,PTPRC),epithelial/cancer (EpCAM+,EPCAM),stromal (CD10+,MME,fibro or CD31+,PECAM1,endo)
-#文中提供的都是常见的细胞群：上皮细胞（EPCAM、KRT19、CLDN4）、基质（PECAM1、CLO1A2、VWF）、增殖性（MKI67、STMN1、PCNA）、T（CD3D、CD3E、CD2）、B（CD79A，IGHG1，MS4A1），NK（KLRD1、GNLY、KLRF1）和髓系（CSF1R、CSF3R、CD68）细胞。
 rm(list=ls());gc()
 setwd('/home/adore_org/B_scRNA-seq/analysis/')
 source('scRNA_scripts/lib.R')
@@ -38,20 +34,6 @@ getwd()
 dir.create("./3-Celltype")
 setwd("./3-Celltype")
 scRNA=sce.all.int
-
-# genes_to_check = c('EPCAM','KRT19','CLDN4','SCGB1A1',  #上皮
-#                    'PECAM1' , 'CLO1A2', 'VWF',  #基质
-#                    'CDH5', 'PECAM1', 'VWF','CLDN5',  #内皮
-#                    'LUM' , 'FGF7', 'MME',  #成纤维
-#                    'CD3D', 'CD3E', 'CD8A', 'CD4','CD2', #T
-#                    'AIF1', 'C1QC','C1QB','LYZ',  #巨噬
-#                    'MKI67', 'STMN1', 'PCNA',  #增殖
-#                    'CPA3' ,'CST3', 'KIT', 'TPSAB1','TPSB2',#肥大
-#                    'GOS2', 'S100A9','S100A8','CXCL8', #中性粒细胞
-#                    'KLRD1', 'GNLY', 'KLRF1','AREG', 'XCL2','HSPA6', #NK
-#                    'MS4A1','CD19', 'CD79A','IGHG1','MZB1', 'SDC1',  #B
-#                    'IGHD',  #MALT B
-#                    'CSF1R', 'CSF3R', 'CD68') #髓系
 
 genes_to_check = c('Cd79a','Ms4a1','Cd19', # B
                    'CD3D', 'CD3E', 'Nkg7', # T

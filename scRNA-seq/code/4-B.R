@@ -58,7 +58,6 @@ ggsave(plot=p, filename="B_cell_tsne_res0.5.pdf",height = 6,width = 7)
 ###先根据文中注释看看情况
 genes_to_check = c('Zbtb32','Bhlhe41','Fcrl5','Zcwpw1','Cd5', # B1 cells
                    'Ighd','Fcer2a','Ms4a4c','Vpreb3','Cr2','Cd1d1') #B2 ells
-Breg_gene = c('Fcrl5','Ptpn22','Ccdc28b','Zbtb20','Cd9')
 library(stringr)  
 genes_to_check=str_to_title(genes_to_check)
 genes_to_check
@@ -96,7 +95,6 @@ myfindmarkers(RNA,filename = 'sample',min.pct = 0.1,species = 'mouse',colors = m
 setwd('../')
 getwd()
 
-ABC <- c('Fas','Tbx21','Ighg3','Zbtb20','Itgam','Itgax','H2-Ab1','Dnm3')
 # stacked_violin_plot
 source('/home/adore_org/B_scRNA-seq/analysis/scRNA_scripts/stacked_violin_plot.R')
 stacked_violin_plot(gene = genes_to_check,seurat_object = sce,text.size = 10,flip = F,col = mycolors,
@@ -173,24 +171,10 @@ setwd('../')
 
 source('/home/adore_org/Breg/scRNA_scripts/mymodule_score.R')
 
-genelist <- c('Cd68','Socs1', 'Spn','Tlr4','Clec2g','Socs6','Zc3h12d', 'Prkcz','Dhx58','Syt11','Nr2f6','Pycard',
-                   'Dusp3','Tjp2','Twsg1','Hspd1','Fbxw7','Tnfrsf4','Pawr','Ebi3','Fgr','Tnfrsf14','Slfn1','Vsir','Fstl3',
-                   'Traf3ip1','Fgl2','Sirpa','','Ttl/12','Ahr','Slamf1','Ldir','Ubash3b','Gfer','Ptpn22','Lilrb4a',
-                   'Zc3h8','Pglyrp2','Furin','Nbl1','Egr1','Cd1d1','Sirt1','Nlrc3','Adora2a','Cuedc2','Tlr6','Nod2','Dlg1',
-                   'Rin3','Tlr2','Nrarp','Dtx1','Nlrx1','Nlrc5','Prdm1','Cd80','Grn','Cd274','Prnp','Cd86','C1qbp','Pdcd1lg2',
-                   'Rhbdd3','Cd44','Prdx2','Git1','Serpinb9',
-                   'Ctla4','Ptprj','Cd5','Fcrl5','Cd300lf','Ccr1','Lgals3','lI10','Pdcd1','Cdkn2a','Gpr55','Tigit','Sh2d1b1',
-                   'Apoe','Cd9','Clstn1','Nrp2','Zbtb32','Rgs13','Tbc1d9','Atxn1','Pik3cg','Nid1','Mical3','Bcl2115','Rbm47',
-                   'Pld4','Rab11fip4','Lipc','Dmx2','Mlkl','Slc7a7','Zfp945','Ryk','Nebl','Acp5','Tnfsf9','Capg','Zdhhc2', 'Tnfsf8',
-                   'Ahnak','Alpl','Stk39','Tnfrsf8','Zap70','Perp','S100a11','Fhit','Timd2','Csf2rb','Nek6','Cd70','Krt222','Cpd',
-                   'Elk3','Actn1','Bag3','Crim1','Lysmd2','Hdac9','Stat1','Serpinc1','Cebpd','Nt5e','C130026121Rik')
+B1_marker <- c('Zbtb32', 'Bhlhe41', 'Anxa2', 'Fcrl5', 'Zcwpw1', 'Ass1', 'Zbtb20','Cd9')
 
-genelist_B10 <- c('Apoe','Cd9','Clstn1','Nrp2','Zbtb32','Rgs13','Tbc1d9','Atxn1','Pik3cg','Nid1','Mical3','Bcl2115','Rbm47',
-                  'Pld4','Rab11fip4','Lipc','Dmx2','Mlkl','Slc7a7','Zfp945','Ryk','Nebl','Acp5','Tnfsf9','Capg','Zdhhc2', 'Tnfsf8',
-                  'Ahnak','Alpl','Stk39','Tnfrsf8','Zap70','Perp','S100a11','Fhit','Timd2','Csf2rb','Nek6','Cd70','Krt222','Cpd',
-                  'Elk3','Actn1','Bag3','Crim1','Lysmd2','Hdac9','Stat1','Serpinc1','Cebpd','Nt5e','C130026121Rik')
-genelist <- genelist[(genelist %in%  rownames(sce))==TRUE]
-
+B2_marker <- c('Ighd','Fcer2a','Ms4a4c','Vpreb3','Cr2','Ccr7','Neurl3','Icosl')
+B1a_marker <- c('Cd19','Cd5','Il10','Itgam')
 B1_marker <- marker_class1$B1
 B2_marker <- marker_class1$B2
 library(stringr)  
@@ -199,12 +183,10 @@ B2_marker=str_to_title(B2_marker)
 
 B1_marker <- B1_marker[(B1_marker %in%  rownames(sce))==TRUE]
 B2_marker <- B2_marker[(B2_marker %in%  rownames(sce))==TRUE]
+B1a_marker <- B1a_marker[(B1a_marker %in%  rownames(sce))==TRUE]
 
-Breg_gene = c('Fcrl5','Ptpn22','Ccdc28b','Zbtb20','Cd9','Cr2','Cd1d1','Cd5','Cd24a','Fcer2a','Ighd','Ighm','Sdc1','Havcr1','Cd274')
-B1_marker <- c('Zbtb32', 'Bhlhe41', 'Anxa2', 'Fcrl5', 'Zcwpw1', 'Ass1', 'Zbtb20','Cd9')
 
-B2_marker <- c('Ighd','Fcer2a','Ms4a4c','Vpreb3','Cr2','Ccr7','Neurl3','Icosl')
-B1a_marker <- c('Cd19','Cd5','Il10','Itgam')
+
 mymodule_score(RNA,genelist = B1a_marker,cutoff=1.0,filename="B1a_marker")
 dir.create('mymodule2')
 setwd('mymodule2')
@@ -216,7 +198,6 @@ setwd('../')
 score_B1 <- read.csv('/home/adore_org/B_scRNA-seq/analysis/16-B1/mymodule2/B1_marker_score.csv',header = T,row.names = 1)
 score_B2 <- read.csv('/home/adore_org/B_scRNA-seq/analysis/12-B/mymodule2/B2_marker_score.csv',header = T,row.names = 1)
 score_B1a <- read.csv('/home/adore_org/B_scRNA-seq/analysis/12-B/mymodule2/B1a_marker_score.csv',header = T,row.names = 1)
-
 
 
 #sce <- AddMetaData(sce, metadata = score_B1)

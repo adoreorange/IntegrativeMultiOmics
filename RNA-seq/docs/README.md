@@ -19,7 +19,7 @@
     ↓
 5. 差异表达分析 (DESeq2)
     ↓
-6. 功能富集分析 (GO/KEGG)
+6. 功能富集分析 (GO/KEGG/GSEA)
     ↓
 7. 结果可视化
 ```
@@ -30,12 +30,30 @@
 RNA-seq/
 ├── code/                    # 分析脚本
 │   ├── 01_qc/              # 质量控制
+│   │   └── fastqc.sh
 │   ├── 02_preprocess/      # 数据预处理
+│   │   └── trimmomatic.sh
 │   ├── 03_alignment/       # 序列比对
+│   │   └── star_align.sh
 │   ├── 04_quantification/  # 基因定量
+│   │   └── featurecounts.sh
 │   ├── 05_de_analysis/     # 差异表达分析
+│   │   └── deseq2_analysis.R
 │   ├── 06_enrichment/      # 富集分析
+│   │   ├── enrichment_analysis.R
+│   │   ├── OF_YF_WT_GO.R
+│   │   ├── OF_YF_WT_GSEA_analysis.R
+│   │   ├── OM_YM_WT_GO.R
+│   │   └── TF_enrich.R
 │   ├── 07_visualization/   # 可视化
+│   │   ├── visualization.R
+│   │   ├── GO_KEGG_DOWN.R
+│   │   ├── GO_KEGG_UP.R
+│   │   ├── GSEA_plot.R
+│   │   ├── heatmap_tpm_OF_YF_WT.R
+│   │   ├── heatmap_tpm_OM_YM_WT.R
+│   │   ├── vacoplot_OF_WT_YF_WT.R
+│   │   └── vacoplot_OM_WT_YM_WT.R
 │   └── main.sh             # 主流程脚本
 ├── data/                   # 数据目录
 │   ├── raw/               # 原始数据
@@ -47,6 +65,40 @@ RNA-seq/
 ├── docs/                  # 文档
 └── renv.lock             # R 包版本锁定
 ```
+
+## 脚本功能说明
+
+### 质量控制 (01_qc/)
+- `fastqc.sh`：使用 FastQC 对原始 FASTQ 文件进行质量评估
+
+### 数据预处理 (02_preprocess/)
+- `trimmomatic.sh`：使用 Trimmomatic 去除接头序列和低质量碱基
+
+### 序列比对 (03_alignment/)
+- `star_align.sh`：使用 STAR 将测序 reads 比对到参考基因组
+
+### 基因定量 (04_quantification/)
+- `featurecounts.sh`：使用 featureCounts 对基因进行表达量计数
+
+### 差异表达分析 (05_de_analysis/)
+- `deseq2_analysis.R`：使用 DESeq2 进行差异表达分析
+
+### 富集分析 (06_enrichment/)
+- `enrichment_analysis.R`：通用富集分析脚本
+- `OF_YF_WT_GO.R`：OF vs YF WT 对比组的 GO 富集分析
+- `OF_YF_WT_GSEA_analysis.R`：OF vs YF WT 对比组的 GSEA 分析
+- `OM_YM_WT_GO.R`：OM vs YM WT 对比组的 GO 富集分析
+- `TF_enrich.R`：转录因子富集分析
+
+### 可视化 (07_visualization/)
+- `visualization.R`：主可视化脚本
+- `GO_KEGG_DOWN.R`：下调基因的 GO/KEGG 富集图
+- `GO_KEGG_UP.R`：上调基因的 GO/KEGG 富集图
+- `GSEA_plot.R`：GSEA 分析结果可视化
+- `heatmap_tpm_OF_YF_WT.R`：OF vs YF WT 对比组的表达量热图
+- `heatmap_tpm_OM_YM_WT.R`：OM vs YM WT 对比组的表达量热图
+- `vacoplot_OF_WT_YF_WT.R`：OF vs YF WT 对比组的火山图
+- `vacoplot_OM_WT_YM_WT.R`：OM vs YM WT 对比组的火山图
 
 ## 环境配置
 
@@ -198,11 +250,16 @@ THREADS=8
 ### 5. 富集分析 (06_enrichment/)
 - `GO_enrichment_*.csv`: GO 富集结果
 - `KEGG_enrichment_*.csv`: KEGG 富集结果
+- `GSEA_results_*.csv`: GSEA 分析结果
+- `TF_enrichment_*.csv`: 转录因子富集结果
 - `*_barplot.png`: 柱状图
 - `*_dotplot.png`: 气泡图
 
 ### 6. 可视化 (07_visualization/)
-- 各种高质量图表
+- `heatmap_tpm_*.png`: TPM 表达量热图
+- `volcano_plot_*.png`: 火山图
+- `GO_KEGG_*.png`: GO/KEGG 富集图
+- `GSEA_plot_*.png`: GSEA 结果图
 
 ## 常见问题
 
@@ -231,3 +288,4 @@ RNA-seq 分析流程
 ## 更新日志
 
 - 2024-01: 初始版本
+

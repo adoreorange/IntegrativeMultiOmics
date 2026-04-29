@@ -31,9 +31,9 @@ table(sce1$orig.ident)
 set.seed(10086)
 table(sce1$orig.ident)
 if(T){
-  dir.create("2-harmony_dim30")
+  dir.create("2-harmony_dim15")
   getwd()
-  setwd("2-harmony_dim30")
+  setwd("2-harmony_dim15")
   source('/home/adore_org/B_scRNA-seq/analysis/scRNA_scripts/harmony.R')
   # 默认 ScaleData 没有添加"nCount_RNA", "nFeature_RNA"
   # 默认的
@@ -128,7 +128,6 @@ list.files()
 ###根据marker注释细胞
 genes_to_check = c('Zbtb32','Bhlhe41','Zcwpw1', # B1 cells
                    'Ighd','Fcer2a','Vpreb3')
-gene <- c('Apoe','Fos','Jun','Zcwpw1','Cd72', 'Ltb', 'Ly6k', 'Bcl11a','Ctla4')
 # features plot
 dir.create('featureplot')
 setwd('featureplot')
@@ -142,7 +141,7 @@ dir.create('stack_vlnplot')
 setwd('stack_vlnplot')
 source('/home/adore_org/B_scRNA-seq/analysis/scRNA_scripts/stacked_violin_plot.R')
 gene <- c('Apoe','Fos','Fcgr2b','Junb','Jun','Wfdc17','Cyp4f18','Fcrl5','Zcwpw1','Serpinb1a','Rbm3','Nfkb1')
-AP <- c('Apoe','Fos','Jun','Junb')
+
 stacked_violin_plot(gene = gene,seurat_object = sce,text.size = 10,flip = F,
                     filename = "Age_gene",width = 12,height = 10,limits.max = 9,Mean = F,col = mycolors)
 
@@ -161,7 +160,6 @@ my_stacked_violin_plot(gene = Bcheck_gene,seurat_object = sce,Clusters = 'RNA_sn
 
 setwd('../')
 gene <- c('Apoe','Fos','Fcgr2b','Junb','Jun','Wfdc17','Cyp4f18','Fcrl5','Zcwpw1','Serpinb1a','Rbm3','Nfkb1')
-AP <- c('Apoe','Fos','Jun','Junb','Jund')
 # doplot
 p = DotPlot(sce, features=unique(gene), assay = 'RNA',group.by = 'Sample',) + 
   coord_flip() + #翻转
@@ -172,8 +170,7 @@ p = DotPlot(sce, features=unique(gene), assay = 'RNA',group.by = 'Sample',) +
   guides(size = guide_legend("Percent Expressed") )+ #legend
   scale_color_gradientn(colours = c("blue", "red"));p
 #ggsave('check_last_markers.pdf',height = 11,width = 11)
-ggsave('RNA_snn_res.0.8_AP_markers.pdf',height = 6,width = 7)
-ggsave('age_stage_AP_markers.pdf',height = 8,width = 9)
+ggsave('age_stage_markers.pdf',height = 8,width = 9)
 
 # rationplot
 source('/home/adore_org/B_scRNA-seq/analysis/scRNA_scripts/myrationplot.R')

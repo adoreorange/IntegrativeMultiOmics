@@ -19,7 +19,7 @@
     ↓
 5. 差异Peak分析 (DESeq2)
     ↓
-6. 功能富集分析 (GO/KEGG)
+6. 功能富集分析 (GO/KEGG/Motif)
     ↓
 7. 结果可视化
 ```
@@ -30,12 +30,38 @@
 ATAC-seq/
 ├── code/                    # 分析脚本
 │   ├── 01_qc/              # 质量控制
+│   │   └── fastqc.sh
 │   ├── 02_preprocess/      # 数据预处理
+│   │   └── trimmomatic.sh
 │   ├── 03_alignment/       # 序列比对
+│   │   └── bwa_align.sh
 │   ├── 04_peak_calling/    # Peak Calling
+│   │   └── macs2_peak.sh
 │   ├── 05_diff_peaks/      # 差异Peak分析
+│   │   └── deseq2_peaks.R
 │   ├── 06_enrichment/      # 富集分析
+│   │   ├── enrichment_peaks.R
+│   │   └── motif_analysis.sh
 │   ├── 07_visualization/   # 可视化
+│   │   ├── diffbind/
+│   │   │   ├── ChIPseeker_all_wt.R
+│   │   │   ├── OF_YF.R
+│   │   │   ├── OF_YF_out_bed.R
+│   │   │   ├── OM_YM.R
+│   │   │   ├── OM_YM_out_bed.R
+│   │   │   ├── all_diffbind.R
+│   │   │   ├── diffbind.R
+│   │   │   ├── enrichGO_OF_YF_ATAC.R
+│   │   │   ├── enrichGO_OM_YM_ATAC.R
+│   │   │   ├── enrichKEGG_OF_YF_ATAC.R
+│   │   │   ├── enrichKEGG_OM_YM_ATAC.R
+│   │   │   ├── mycolors.R
+│   │   │   ├── out_bed.R
+│   │   │   ├── pie_plot.R
+│   │   │   └── plot_peaks.R
+│   │   ├── footprint.sh
+│   │   ├── tss_plot.sh
+│   │   └── visualization_peaks.R
 │   └── main.sh             # 主流程脚本
 ├── data/                   # 数据目录
 │   ├── raw/               # 原始数据
@@ -47,6 +73,39 @@ ATAC-seq/
 ├── docs/                  # 文档
 └── renv.lock             # R 包版本锁定
 ```
+
+## 脚本功能说明
+
+### 质量控制 (01_qc/)
+- `fastqc.sh`：使用 FastQC 对原始 FASTQ 文件进行质量评估
+
+### 数据预处理 (02_preprocess/)
+- `trimmomatic.sh`：使用 Trimmomatic 去除 Nextera 接头序列和低质量碱基
+
+### 序列比对 (03_alignment/)
+- `bwa_align.sh`：使用 BWA 将测序 reads 比对到参考基因组
+
+### Peak Calling (04_peak_calling/)
+- `macs2_peak.sh`：使用 MACS2 进行峰检测
+
+### 差异Peak分析 (05_diff_peaks/)
+- `deseq2_peaks.R`：使用 DESeq2 进行差异峰分析
+
+### 富集分析 (06_enrichment/)
+- `enrichment_peaks.R`：Peak 功能富集分析
+- `motif_analysis.sh`：基序分析
+
+### 可视化 (07_visualization/)
+- `visualization_peaks.R`：主可视化脚本
+- `footprint.sh`：足迹分析
+- `tss_plot.sh`：TSS 分布图
+- **diffbind/**：DiffBind 差异结合分析
+  - `all_diffbind.R`：DiffBind 主分析脚本
+  - `ChIPseeker_all_wt.R`：Peak 注释
+  - `OF_YF.R` / `OM_YM.R`：组间差异分析
+  - `enrichGO_*.R`：GO 富集分析
+  - `enrichKEGG_*.R`：KEGG 富集分析
+  - `pie_plot.R` / `plot_peaks.R`：可视化脚本
 
 ## 环境配置
 
@@ -116,7 +175,7 @@ BiocManager::install(c(
     "DESeq2", "apeglm", "ChIPseeker", "GenomicRanges",
     "rtracklayer", "clusterProfiler", "org.Hs.eg.db",
     "TxDb.Hsapiens.UCSC.hg38.knownGene", "enrichplot",
-    "ComplexHeatmap"
+    "ComplexHeatmap", "DiffBind"
 ))
 
 # CRAN 包
@@ -211,6 +270,7 @@ macs2 callpeak \
 ### 5. 富集分析 (06_enrichment/)
 - Peak 基因组注释
 - GO/KEGG 富集结果
+- Motif 分析结果
 - 富集图表
 
 ### 6. 可视化 (07_visualization/)
@@ -218,6 +278,7 @@ macs2 callpeak \
 - Peak 分布图
 - TSS 分布图
 - FRiP 分数图
+- DiffBind 分析结果
 
 ## 质量控制指标
 
@@ -279,6 +340,7 @@ bedGraphToBigWig peaks.bedgraph genome.chrom.sizes peaks.bw
 - [ENCODE ATAC-seq Pipeline](https://github.com/ENCODE-DCC/atac-seq-pipeline)
 - [MACS2 文档](https://macs3-project.github.io/MACS/)
 - [ChIPseeker 文档](https://bioconductor.org/packages/ChIPseeker)
+- [DiffBind 文档](https://bioconductor.org/packages/DiffBind)
 
 ## 作者
 
@@ -287,3 +349,4 @@ ATAC-seq 分析流程
 ## 更新日志
 
 - 2024-01: 初始版本
+
