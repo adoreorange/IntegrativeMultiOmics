@@ -1,4 +1,4 @@
-# 并没有直接画甜甜圈图的R包，所以在饼图源代码的基础上改改
+# 甜甜圈绘图函数
 doughnut <- function (x, labels = names(x), edges = 200, outer.radius = 0.8,
                       inner.radius=0.6, clockwise = FALSE,
                       init.angle = if (clockwise) 90 else 0, density = NULL,

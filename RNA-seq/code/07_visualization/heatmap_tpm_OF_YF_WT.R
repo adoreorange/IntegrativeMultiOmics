@@ -13,8 +13,8 @@ YF <- data.frame(yf=rev(grep('YF-WT',colnames(data),value = T)))
 deg.all_data <- dplyr::select(data, c(gene_id,YF$yf,OF$of))
 
 features_data <- read.csv('/home/adore_org/Bulk_data_analysis/data_out/OF_YF_WT.csv',header = T, stringsAsFactors = F)
-up_features <-features_data$symbol[features_data$change=='up']
-down_features <-features_data$symbol[features_data$change=='down']
+up_features <-features_data$symbol[features_data$change=='up']# 自己选择
+down_features <-features_data$symbol[features_data$change=='down'] # 自己选择
 features <- c(up_features, down_features)
 print(length(features))
 

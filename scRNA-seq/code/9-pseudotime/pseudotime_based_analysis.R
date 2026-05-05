@@ -1,3 +1,4 @@
+# 运行pseudotime分析
 #!/usr/bin/env Rscript
 rm(list=ls());gc()
 setwd('/home/adore_org/B_scRNA-seq/analysis/')
@@ -20,7 +21,7 @@ source('/home/adore_org/B_scRNA-seq/analysis/pseudotime/plot_functions.R')
 
 # specify which data to load
 projDir <- '/home/adore_org/B_scRNA-seq/analysis/'
-seuDir <- '7-B1/'
+seuDir <- '5-B1/'
 seuFile <- './2-harmony_dim15/sce.all_int.rds' # '/Aggr_Jan2022_Chol-Hep_harmony_th=0.1.rds'
 inFile <- paste0(projDir, seuDir, seuFile)
 

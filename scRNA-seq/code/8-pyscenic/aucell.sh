@@ -1,3 +1,4 @@
+# 输出SCENIC.loom文件
 echo $date
 input_loom=/home/huyifeng/pyscenic/Breg.loom
 reg_csv=/home/huyifeng/pyscenic/reg.csv

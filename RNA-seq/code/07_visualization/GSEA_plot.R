@@ -1,27 +1,9 @@
-#' gseKEGG bar plot
-#'
-#' plot for enrich_gsekegg result
-#'
-#' @param data a enrich_gsekegg result
-#' @param pvalue_cut filter by pvalue
-#' @param enrichmentScore_cut filter by enrichmentScore
-#' @param top top rows of up and down
-#'
-#' @import ggplot2
-#' @importFrom dplyr top_n mutate
-#' @importFrom forcats fct_reorder
-#' @importFrom RColorBrewer brewer.pal
-#' @importFrom shadowtext geom_shadowtext
-#' @importFrom ggnewscale new_scale_color
-#'
-#' @return ggplot ob
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' test <- enrich_gsekegg(DEG_df,x = "log2FoldChange")
-#' geskegg_barplot(test)
-#' }
+library(clusterProfiler)
+library(ggplot2)
+library(stringr)
+library(fcats)
+library(dplyr)
+library(gseKEGG)
 GSEAbar <- function(res, top = 10) {
   
   dat <- res@result

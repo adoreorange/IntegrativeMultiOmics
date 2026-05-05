@@ -1,3 +1,4 @@
+# B-2b细胞划分和可视化分析
 rm(list=ls());gc()
 setwd('/home/adore_org/B_scRNA-seq/analysis/')
 options(stringsAsFactors = F)
@@ -153,4 +154,4 @@ source('../scRNA_scripts/mydimplot.R')
 mydimplot(seurat_object = sce,filename = 'B1_B2_umap',reduction = 'umap',group.by = 'celltype',cols = mycolors)
 
 # save
-saveRDS(sce, "mymodule_B_celltype.rds")
+saveRDS(sce, "B2_celltype.rds")

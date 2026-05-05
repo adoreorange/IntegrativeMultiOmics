@@ -1,3 +1,7 @@
+# footprinting分析脚本
+# input: sorted.bam, narrowPeak
+# output: footprinting result
+
 date
 cd /home/huyifeng/ATAC/con_rep/
 pwd

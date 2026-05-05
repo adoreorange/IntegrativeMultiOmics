@@ -1,13 +1,4 @@
 
-# MESSAGE -----------------------------------------------------------------
-#
-# author: Yulin Lyu
-# email: lvyulin@pku.edu.cn
-#
-# require: R whatever
-#
-# ---
-
 # 1. Load packages --------------------------------------------------------
 rm(list=ls());gc()
 setwd("/home/adore_org/all_analysis/RNA/GO/")

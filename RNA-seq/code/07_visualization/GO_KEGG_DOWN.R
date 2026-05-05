@@ -6,13 +6,6 @@ library(dplyr)
 rm(list=ls());gc()
 setwd('/home/adore_org/Bulk_data_analysis/')
 
-down_gene <- c('Adm','Emb','Frrs1','Dnaja1','Dpp4','Hbb-b1','Pde2a','BC035044',
-               '1700017B05Rik','Cd209a','Amz1','Eps8','Edaradd','Hsph1',
-               'Ehd3','Znrf3','Ctnna1','Alpl','Gpr137b','Tcf7','Samd8','Retnla','Gpr171',
-               'Fam78a','St3gal4','Lrrc16a','Serpine2','Scamp1',
-               'Cecr2','Otub2','Dag1','Oxsm','Plxnb2','Cd93','Wee1','Rasgef1a',
-               'Nrep','2810025M15Rik','Fam134b','Gpr132',
-               'Rps4l','Gsto1','Mgst2','Slc16a1','Gprc5b','Il9r')
 features_data <- read.csv('/home/adore_org/Bulk_data_analysis/data_out/OM_YM_WT.csv',header = T, stringsAsFactors = F)
 up_features <-features_data$symbol[features_data$change=='up']
 down_features <-features_data$symbol[features_data$change=='down']

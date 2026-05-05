@@ -1,3 +1,9 @@
+# 计算基因表达与pseudotime的相关性
+# @param mon monocle3对象
+# @param GoI 基因名称向量
+# @param corr.method 相关性计算方法，默认spearman
+# @return data.frame
+
 ### Functions ### --------------------------------------------------------------
 # seu <- seu.sub
 # mon <- mon.sub

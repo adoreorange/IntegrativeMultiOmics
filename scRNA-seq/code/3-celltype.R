@@ -1,9 +1,12 @@
 ###### step2: 确定单细胞亚群生物学名字 ######
-# 一般来说，为了节省工作量，我们选择0.1的分辨率进行命名
-# 因为命名这个步骤是纯人工操作
-# 除非0.1确实分群太粗狂了，我们就选择0.8 
+# 查看不同分辨率下的细胞分类
+# 选择合适的分辨率
+table(Idents(sce.all.int))
+table(sce.all.int$seurat_clusters)
+table(sce.all.int$RNA_snn_res.0.1) 
+table(sce.all.int$RNA_snn_res.0.2) 
 
-###### 常见分群
+###### 常分群
 # T Cells (CD3D, CD3E, CD8A), 
 # B cells (CD19, CD79A, MS4A1 [CD20]), 
 # Plasma cells (IGHG1, MZB1, SDC1, CD79A), 
@@ -35,6 +38,7 @@ dir.create("./3-Celltype")
 setwd("./3-Celltype")
 scRNA=sce.all.int
 
+# 根据基因marker划分细胞类型
 genes_to_check = c('Cd79a','Ms4a1','Cd19', # B
                    'CD3D', 'CD3E', 'Nkg7', # T
                    'Cd68', 'CSF1R','CSF3R') # 髓系细胞

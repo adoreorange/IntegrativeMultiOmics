@@ -1,3 +1,5 @@
+# 可视化所有样本的差异Peak
+
 library(ggplot2)
 rm(list=ls());gc()
 use_colors <- c(YM ='#009bff', OM ='#5558c7',YF ='#FFA500',OF ='#FF4500',

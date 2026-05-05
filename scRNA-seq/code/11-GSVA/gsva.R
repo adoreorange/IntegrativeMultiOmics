@@ -1,3 +1,7 @@
+# 运行GSVA分析
+# @param expr 表达矩阵
+# @param genesets 基因集列表
+# @return gsva_res对象
 library(Seurat)
 library(SeuratData)
 library(GSVA)

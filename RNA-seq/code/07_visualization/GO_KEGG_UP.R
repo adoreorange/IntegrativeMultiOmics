@@ -6,12 +6,6 @@ library(dplyr)
 rm(list=ls());gc()
 setwd('/home/adore_org/Bulk_data_analysis/')
 
-up_gene <- c('Hoxb7','Dlc1','Sdcbp2','Csrnp3','2610037D02Rik','Map3k15','Dmrt2','Mnda','Cyp11a1',
-             'Cd59a','C130026I21Rik','Fer','Creb5','Slamf1','Ptpn14','Apbb1','Hus1b','Mid1','Pbx3',
-             'Scn4a','Camkk1','Rgs18','Il2rb','Gm1965','Cd3g','Laptm4b','Syt11','Tnfsf4','D10Wsu102e','AI427809',
-             'Rcn3','Scimp','Cd72','Serpinb1a','Rasgrp3','Gm6377','Hddc3','Raph1','Tmprss13','Igf1r','Lacc1',
-             'Nt5e','Lag3','AW112010','Rom1','Fcgr4','Mcm6','Cd200','Herc3','Aldoc',
-             'Tnfaip8','A530032D15Rik','Irf8','Ssbp3','Id3','F11r','Chst3','Arhgef12','Pgs1','Stk3')
 features_data <- read.csv('/home/adore_org/Bulk_data_analysis/data_out/OF_YF_WT.csv',header = T, stringsAsFactors = F)
 up_features <-features_data$symbol[features_data$change=='up']
 down_features <-features_data$symbol[features_data$change=='down']
@@ -41,7 +35,7 @@ genelist <- bitr(up_gene, fromType="SYMBOL",
 genelist <- pull(genelist,ENTREZID)               
 ekegg <- enrichKEGG(gene = genelist,
                     organism   = 'mmu',
-                
+                    category = 'KEGG',
                     pAdjustMethod = "BH",
                     pvalueCutoff = 0.05,
                     qvalueCutoff = 0.05)
@@ -51,10 +45,7 @@ ekegg<- setReadable(ekegg,'org.Mm.eg.db','ENTREZID')
 
 write.csv(ekegg@result, './data_out/kegg_UP_overlap.csv')
 
-
-
 # plot function ----
-
 gk_plot <- ggplot(head(ego_UP_overlap,10),aes(reorder(Description,log10pvalue), y=log10pvalue)) +
   geom_bar(stat="identity", width=0.8, fill='#FF4500') +
   coord_flip() +
@@ -88,7 +79,6 @@ erich2plot <- function(data4plot){
     })/apply(data4plot,1,function(x){
       as.numeric(strsplit(x[4],'/')[[1]][1])
     })
-  
   p <- ggplot(data4plot,aes(BgRatio,Description))
   p<-p + geom_point()
   
@@ -97,7 +87,6 @@ erich2plot <- function(data4plot){
   pr <- pbubble + scale_colour_gradient(low="#90EE90",high="red") + 
     labs(color=expression(-log[10](qvalue)),size="observed.gene.count", 
          x="Richfactor", y="term.description",title="Enrichment Process")
-  
   pr <- pr + theme_bw()
   pr
 }

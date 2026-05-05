@@ -1,4 +1,5 @@
-## 可视化代码修正版
+## 可视化pyscenic结果
+# TF 可视化
 
 rm(list=ls())
 library(Seurat)
@@ -37,7 +38,7 @@ rownames(regulonAUC)
 names(regulons)
 
 library(SeuratData) # 加载seurat数据集  
-sce <- readRDS('/home/hyf/analysis/5-B1/B1_stage.rds')   
+sce <- readRDS('/home/hyf/analysis/5-B1/2-harmony_dim15/sce.all_int.rds')   
 table(sce$seurat_clusters)
 table(Idents(sce))
 Idents(sce) <- sce$RNA_snn_res.0.7
@@ -70,7 +71,6 @@ save(sub_regulonAUC,cellTypes,cellClusters,sce,
      file = 'for_rss_and_visual.Rdata')
 
 ####
-# 尴尬的是TCF4(+)我这个数据里面没有，换了个PAX5(+)和REL(+)
 regulonsToPlot = c('Nfkb2(+)','Myb(+)','Elf4(+)','Junb(+)','Stat1(+)',
                    'Irf1(+)','Irf7(+)','Irf3(+)','Irf2(+)')
 regulonsToPlot

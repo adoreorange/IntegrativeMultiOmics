@@ -1,3 +1,7 @@
+# diffbind分析脚本：主要分析所有样本的差异Peak，包括PCAs、FRiP、均一化、对比分析、可视化
+# all_diffbind.R
+# input: bigWig
+# output: diffbind result
 setwd('/home/adore_org/diffbind/')
 #BiocManager::install("lessR")
 library(DiffBind, quietly = TRUE)
@@ -76,7 +80,7 @@ saveRDS(peakMtx, "./data_out/all/peakMtx.rds")
 
 
 
-###
+### YF_OF
 diffPeaks_YF_OF <- dba.report(sampleDiff,th = 1,contrast = 1) %>%
   data.frame() %>%
   mutate(type = case_when(Fold >= 1 & FDR < 0.05 ~ "sigUp",
@@ -109,7 +113,7 @@ table(peakAnno_all_df$type)
 # export all diff
 write.csv(peakAnno_all_df,file = paste('./data_out/OF_YF/diffbind_peaks_anno_diff_OF_YF.csv') ,row.names = F)
 
-# plot
+# plot 
 peakAnno_df$annotation[grepl(x=peakAnno_df$annotation,pattern = 'Promoter')] <-'Promoter'
 
 pdf(file = './plot/OF_YF/OF_YF_all_open_bar.pdf',height = 3,width = 12)
@@ -135,7 +139,7 @@ peakAnno_up_df$GeneName <- ids
 # output
 write.csv(peakAnno_up_df, './data_out/OF_YF/OF_YF_sig_up.csv', row.names = FALSE)
 
-# plot
+# plot 启动子区域
 peakAnno_up_df$annotation[grepl(x=peakAnno_up_df$annotation,pattern = 'Promoter')] <-'Promoter'
 
 pdf(file = './plot/OF_YF/OF_YF_up_open_bar.pdf',height = 3,width = 12)
@@ -158,7 +162,7 @@ peakAnno_down_df$GeneName <- ids
 # output
 write.csv(peakAnno_down_df, './data_out/OF_YF/OF_YF_sig_down.csv', row.names = FALSE)
 
-# plot
+# plot 启动子区域
 peakAnno_down_df$annotation[grepl(x=peakAnno_down_df$annotation,pattern = 'Promoter')] <-'Promoter'
 
 pdf(file = './plot/OF_YF/OF_YF_down_open_bar.pdf',height = 3,width = 12)

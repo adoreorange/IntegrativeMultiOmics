@@ -1,3 +1,8 @@
+# 绘制基因表达UMAP图
+# @param seu Seurat对象
+# @param gene 基因名称
+# @param is.log 是否对数转换
+# @return ggplot对象
 make_gene_expression_umap <- function(seu, gene, is.log=F) {
   if (!(is.log)) {
     p <- FeaturePlot(seu, slot='counts', features=gene, reduction='umap',

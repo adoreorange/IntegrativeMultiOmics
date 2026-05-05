@@ -1,4 +1,6 @@
-
+# 从Seurat对象中提取count矩阵
+library(ggplot2)
+library(cowplot)
 library(Seurat)
 library(SCopeLoomR)
 library(AUCell)

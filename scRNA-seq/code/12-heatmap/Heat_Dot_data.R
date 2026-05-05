@@ -1,3 +1,21 @@
+# 绘制热图和点图函数
+# @param object Seurat对象
+# @param assay 分析类型，默认RNA
+# @param features 基因名称向量
+# @param cols 颜色向量，默认lightgrey和red
+# @param col.min 最小颜色值，默认-2.5
+# @param col.max 最大颜色值，默认2.5
+# @param dot.min 最小点值，默认0
+# @param dot.scale 点缩放因子，默认6
+# @param idents 聚类标识，默认NULL
+# @param group.by 分组变量，默认NULL
+# @param split.by 分组变量，默认NULL
+# @param cluster.idents 是否聚类，默认FALSE
+# @param scale 是否缩放，默认TRUE
+# @param scale.by 缩放变量，默认radius
+# @param scale.min 缩放最小值，默认NA
+# @param scale.max 缩放最大值，默认NA
+# @return NULL
 Heat_Dot_data <- function (object, assay = NULL, features, cols = c("lightgrey", 
                                                                     "red"), col.min = -2.5, col.max = 2.5, dot.min = 0, dot.scale = 6, 
                            idents = NULL, group.by = NULL, split.by = NULL, cluster.idents = FALSE, 

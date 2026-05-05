@@ -1,3 +1,5 @@
+# 可视化OF_YF的差异Peak的KEGG路径
+
 peakAnno_up_df2<-peakAnno_up_df[grepl(x=peakAnno_up_df$annotation,pattern = 'Promoter'),] 
 up_gene <- data.frame('gene'=unique(peakAnno_up_df2 $GeneName))
 write.csv(up_gene,'up_gene.csv')

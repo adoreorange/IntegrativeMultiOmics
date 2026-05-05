@@ -1,3 +1,4 @@
+# 计算差异表达基因
 rm(list=ls());gc()
 source('scRNA_scripts/lib.R')
 dir.create("6-DEG")
@@ -140,43 +141,6 @@ dplot(venn, order = TRUE, textsize = 4)
 # upset图
 plot(venn, type = "upset")
 
-
-###下调
-IAC_vs_MIA_down = rownames(P001[P001$group == 'down',]) 
-IAC_vs_AIS_down = rownames(P002[P002$group == 'down',]) 
-MIA_vs_AIS_down = rownames(P003[P003$group == 'down',]) 
-
-inter_downgene <- intersect(intersect(IAC_vs_MIA_down, IAC_vs_AIS_down), MIA_vs_AIS_down)
-
-venn <- venndetail(list(IAC_vs_MIA_down = IAC_vs_MIA_down, IAC_vs_AIS_down = IAC_vs_AIS_down, MIA_vs_AIS_down= MIA_vs_AIS_down))
-detail(venn) 
-
-# 韦恩图
-venn.diagram(x=list(IAC_vs_MIA_down,IAC_vs_AIS_down,MIA_vs_AIS_down),
-             scaled = F, # 根据比例显示大小
-             alpha= 0.5, #透明度
-             lwd=1,lty=1,col=c('#FFFFCC','#CCFFFF',"#FFCCCC"), #圆圈线条粗细、形状、颜色；1 实线, 2 虚线, blank无线条
-             label.col ='black' , # 数字颜色abel.col=c('#FFFFCC','#CCFFFF',......)根据不同颜色显示数值颜色
-             cex = 2, # 数字大小
-             fontface = "bold",  # 字体粗细；加粗bold
-             fill=c('#FFFFCC','#CCFFFF',"#FFCCCC"), # 填充色 配色https://www.58pic.com/
-             category.names = c("IAC_vs_MIA_down", "IAC_vs_AIS_down","MIA_vs_AIS_down") , #标签名
-             cat.dist = 0.07, # 标签距离圆圈的远近
-             cat.pos = c(-30, -330, -180), # 标签相对于圆圈的角度cat.pos = c(-10, 10, 135)
-             cat.cex = 1, #标签字体大小
-             cat.fontface = "bold",  # 标签字体加粗
-             cat.col='black' ,   #cat.col=c('#FFFFCC','#CCFFFF',.....)根据相应颜色改变标签颜色
-             cat.default.pos = "outer",  # 标签位置, outer内;text 外
-             output=TRUE,
-             filename='veendown.png',# 文件保存
-             imagetype="png",  # 类型（tiff png svg）
-             resolution = 400,  # 分辨率
-             compression = "lzw",# 压缩算法
-             height = 2100 ,   # 高度
-             width = 2300
-             
-)
-###结果和文章中不一致，没关系继续往下
 
 # 韦恩饼图
 plot(venn, type = "vennpie")

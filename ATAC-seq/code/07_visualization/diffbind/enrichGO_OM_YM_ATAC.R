@@ -1,3 +1,5 @@
+# 可视化OM_YM的差异Peak的GO路径
+
 setwd('/home/adore_org/diffbind/')
 OM_YM_peaks_up <- read.csv('./data_out/OM_YM/OM_YM_sig_up.csv')
 OM_YM_peaks_up <- peakAnno_all_df

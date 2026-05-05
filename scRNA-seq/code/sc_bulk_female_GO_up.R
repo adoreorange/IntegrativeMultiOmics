@@ -1,4 +1,4 @@
-
+# 绘制sc_bulk_female_GO_up的热图
 library(org.Hs.eg.db)
 library(clusterProfiler)
 source('/home/adore_org/B_scRNA-seq/analysis/scRNA_scripts/mycolors.R')

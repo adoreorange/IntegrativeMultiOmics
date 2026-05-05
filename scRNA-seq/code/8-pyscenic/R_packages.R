@@ -1,4 +1,3 @@
-
 # 检查并安装所需包----
 packages <- c("GenomicFeatures","AUCell", "RcisTarget", "GENIE3", "zoo", "mixtools", "rbokeh",
               "DT", "NMF", "pheatmap", "R2HTML", "Rtsne", "doMC", "doRNG")

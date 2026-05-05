@@ -1,3 +1,4 @@
+# 运行pyscenic分析
 CURRENT_TIME=$(date +"%Y-%m-%d %H:%M:%S")
 echo "The current time is: $CURRENT_TIME"
 echo '# 开始分析'

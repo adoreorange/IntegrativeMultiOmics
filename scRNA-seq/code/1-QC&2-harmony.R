@@ -1,3 +1,4 @@
+# rawdata的数据质控和Harmony分析
 rm(list=ls());gc()
 setwd('/home/adore_org/B_scRNA-seq/analysis/')
 options(stringsAsFactors = F) 
@@ -13,7 +14,6 @@ library(dplyr)
 dir='RNA_seq_data/' 
 fs=list.files('RNA_seq_data/',pattern = '*MWT')
 fs
-
 
 
 samples=list.files('RNA_seq_data/',pattern = '*MWT')
@@ -62,20 +62,20 @@ phe = sce.all@meta.data
 table(phe$orig.ident)
 
 sp='mouse'
-# 如果为了控制代码复杂度和行数 
-# 可以省略了质量控制环节
 ###### step2: QC质控 ######
 dir.create("./1-QC")
 setwd("./1-QC")
+# 质量控制
 # 如果过滤的太狠，就需要去修改这个过滤代码
 source('../scRNA_scripts/qc.R')
 sce.all.filt = basic_qc(sce.all)
-print(dim(sce.all))
-print(dim(sce.all.filt))
-##细胞减少了一点
+print(dim(sce.all)) # 原始数据的细胞数和基因数
+print(dim(sce.all.filt)) # 质量控制后的细胞数和基因数
+# 质量控制后的细胞减少了一点
 setwd('../')
 getwd()
 
+# 查看质量控制后的细胞的ribo和mito比例
 fivenum(sce.all.filt$percent_ribo)
 fivenum(sce.all.filt$percent_mito)
 table(sce.all.filt$nFeature_RNA> 500)
@@ -103,11 +103,8 @@ table(sce.all.filt$orig.ident)
 # 查看高变基因
 VariableFeatures(sce.all.int)
 
-
-#######下面代码也可以不运行
-###### step4:  看标记基因库 ######
-# 原则上分辨率是需要自己肉眼判断，取决于个人经验
-# 为了省力，我们直接看 0.1 和 0.8 即可
+###### step4: 看标记基因库 ######
+# 查看不同分辨率下的细胞分类
 table(Idents(sce.all.int))
 table(sce.all.int$seurat_clusters)
 table(sce.all.int$RNA_snn_res.0.1) 

@@ -87,7 +87,6 @@ p <- plot_gseplot(data = NULL, data_ud = result_KEGG, x = 4);p
 ggsave("./plot/PI3K-Akt signaling pathway.pdf", p, height = 5,width = 8)
 
 
-
 # mutliplot 
 gseaplot2(gsea_res, geneSetID = rownames(result)[1:4],
           color = mycolors[1:4], base_size = 12, rel_heights = c(1, 0.2, 0.4),

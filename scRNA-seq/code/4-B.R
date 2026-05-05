@@ -1,3 +1,5 @@
+# 划分B细胞群，区分B1和B2细胞
+
 rm(list=ls());gc()
 setwd('/home/adore_org/B_scRNA-seq/analysis/')
 options(stringsAsFactors = F)
@@ -55,7 +57,8 @@ p = DimPlot(sce,label=T,cols = mycolors,reduction = 'umap',group.by = 'RNA_snn_r
 ggsave(plot=p, filename="B_cell_umap_res0.5.pdf",height = 6,width = 7)
 p = DimPlot(sce,label=T,cols = mycolors,reduction = 'tsne',group.by = 'RNA_snn_res.0.5');p
 ggsave(plot=p, filename="B_cell_tsne_res0.5.pdf",height = 6,width = 7)
-###先根据文中注释看看情况
+
+### 根据基因marker划分B1和B2细胞
 genes_to_check = c('Zbtb32','Bhlhe41','Fcrl5','Zcwpw1','Cd5', # B1 cells
                    'Ighd','Fcer2a','Ms4a4c','Vpreb3','Cr2','Cd1d1') #B2 ells
 library(stringr)  
@@ -143,8 +146,6 @@ celltype=data.frame(ClusterID=0:10,
 celltype[celltype$ClusterID %in% c(0,3,8,9 ),2]='B2'
 celltype[celltype$ClusterID %in% c(1,2,4,5,6,10,7),2]='B1'
 
-
-
 table(sce@meta.data$RNA_snn_res.0.5)
 table(celltype$celltype)
 
@@ -218,7 +219,7 @@ Idents(sce) <- "celltype.group"
 sce$Sample <- factor(sce$Sample, levels=c('26MWT','15MWT','2MWT'))
 
 #
-saveRDS(sce,'all_cell_Breg.rds')
+saveRDS(sce,'all_cell_B.rds')
 
 cellfordeg<-levels(sce$Sample)
 dir.create('cop_sanmple')
@@ -232,12 +233,5 @@ setwd('../')
 getwd()
 list.files()
 
-# stacked_violin_plot
-dir.create('stack_vlnplot')
-setwd('stack_vlnplot')
-source('/home/adore_org/Breg/scRNA_scripts/stacked_violin_plot.R')
-gene <- c('Fcrl5','Zbtb20','Ccdc28b','Cd9','Ptpn22')
-stacked_violin_plot(gene = gene,seurat_object = sce,text.size = 10,flip = F,
-                    filename = "Breg_hi_marker",width = 12,height = 10,limits.max = 9,Mean = F,col = mycolors)
-setwd('../')
+
 

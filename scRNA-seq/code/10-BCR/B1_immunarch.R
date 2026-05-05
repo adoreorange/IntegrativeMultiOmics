@@ -1,3 +1,8 @@
+# B-1a细胞BCR分析
+# 运行immunarch分析
+# @param scRNA scRNA对象
+# @return immdata对象
+
 setwd('/home/hyf/analysis/BCR_data/')
 rm(list=ls());gc()
 options(stringsAsFactors = F)
@@ -69,6 +74,7 @@ pdf('./B1_homeo_clone.pdf',height = 7,width = 8)
 vis(imm_hom)
 dev.off()
 
+# 各样本的top clone分析
 #imm_top <- imm_top[match(c('2MWT','15MWT','26MWT'), rownames(imm_top)),]
 vis(imm_top) + vis(imm_top, .by = "Sample", .meta = immdata$meta)
 pdf('./B1_top_clone_split.pdf',height = 6,width = 7)

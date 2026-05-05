@@ -1,3 +1,5 @@
+# B-1a细胞划分和可视化分析
+
 rm(list=ls());gc()
 setwd('/home/adore_org/B_scRNA-seq/analysis/')
 options(stringsAsFactors = F)
@@ -151,8 +153,6 @@ p1 <- VlnPlot(sce, features = gene2,stack=T,flip = T,
 ggsave(filename = '28_gene_vlnplot.pdf',plot = p1,height = 18,width = 10)
 
 source('/home/adore_org/B_scRNA-seq/analysis/scRNA_scripts/Vlnplot.R')
-Old_gene <-c('Apoe','Fos','Jun','Junb', 'Fcgr2b', 'Fcrl5', 'Ly6k')
-Young_gene <-c('Hsph1','Ddit4','Lifr','Sfn','Ckb','Lgals3')
 Bcheck_gene <- factor(c('Zbtb32','Bhlhe41','Zcwpw1', 'Fcrl5','Ighd','Fcer2a',
                         'Apoe','Fos','Jun','Junb','Ly6k','Cd72'),levels = c('Zbtb32','Bhlhe41','Zcwpw1', 'Fcrl5','Ighd','Fcer2a',
                                                                             'Apoe','Fos','Jun','Junb','Ly6k','Cd72'))
@@ -209,7 +209,7 @@ for(i in 1:nrow(stage)){
   sce@meta.data[which(sce@meta.data$RNA_snn_res.0.8 == stage$ClusterID[i]),'stage'] <- stage$stage[i]}
 table(sce@meta.data$stage)
 
-###
+### 计算不同年龄阶段的差异表达基因
 sce$age_stage <- paste0(sce$Sample,'_',sce$stage)
 sce$age_stage <- factor(sce$age_stage,levels = c('26MWT_Old','15MWT_Old','2MWT_Old','26MWT_Mid','15MWT_Mid','2MWT_Mid',
                                                  '26MWT_Young','15MWT_Young','2MWT_Young'))
@@ -253,6 +253,6 @@ celltype_umap =DimPlot(sce, reduction = "umap",cols = my36colors,pt.size = 0.5,
 celltype_umap
 ggsave('myeloid_umap_by_celltype.pdf',width = 9,height = 7)
 
-saveRDS(sce, "B1_age.rds")
+saveRDS(sce, "B-1a_cell.rds")
 s <- data.frame(gene=sce@assays[["RNA"]]@var.features)
 write.csv(s, file='variable_gene.csv')

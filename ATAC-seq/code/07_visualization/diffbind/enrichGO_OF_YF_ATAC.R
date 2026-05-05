@@ -1,3 +1,5 @@
+# 可视化OF_YF的差异Peak的GO路径
+
 setwd('/home/adore_org/diffbind/')
 OF_YF_peaks_up <- read.csv('./data_out/OF_YF/OF_YF_sig_up.csv')
 OF_YF_peaks_up <- peakAnno_all_df

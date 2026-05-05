@@ -1,3 +1,4 @@
+# 绘图pseudotime轨迹
 p <- plot_cells(mon, color_cells_by='RNA_snn_res.0.7',trajectory_graph_color='#476D87',
                 label_roots=F, label_branch_points = F,cell_size = 1,group_label_size=6,
                 label_leaves=F, label_cell_groups=T) + scale_color_manual(values=mycolors)+ theme(legend.position='right')

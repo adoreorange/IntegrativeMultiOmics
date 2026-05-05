@@ -40,8 +40,7 @@ up <- length(which(k1=='TRUE'))
 down <- length(which(k2=='TRUE'))
 title <- paste0('pvalue:', P.Value,';log2FC:',logFC,';Up:',up,';Down:',down,';Total:',length(dif2$symbol))
 # select gene
-genes <- c('Tnfaip8','Serpinb1a','Apoe','Rbm3','Cd72', 'Cd24a','Nacc2','Zcchc18',
-           'Id3','Asph','Gimap7','Cdc25b','Slfn1','Nfkb1')
+genes <- c()
 
 # plot
 p <- VolcanoPlot(dif2, padj=0.05, title=title, label.max = 40, label.symbols = genes,log2FC = 1,cols=c('#FFA500', '#FF4500'))

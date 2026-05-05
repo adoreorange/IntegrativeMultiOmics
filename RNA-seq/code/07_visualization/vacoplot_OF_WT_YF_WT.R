@@ -4,7 +4,7 @@ library(clusterProfiler)
 library(tidyverse)
 library(dplyr)
 rm(list=ls());gc()
-setwd('/home/adore_org/Bulk_data_analysis//')
+setwd('/home/adore_org/Bulk_data_analysis/')
 
 # use color
 use_colors <- data.frame(YM ='#009bff', OM ='#5558c7',YF ='#FFA500',OF ='#FF4500',
@@ -40,88 +40,7 @@ up <- length(which(k1=='TRUE'))
 down <- length(which(k2=='TRUE'))
 title <- paste0('pvalue:', P.Value,';log2FC:',logFC,';Up:',up,';Down:',down,';Total:',length(dif2$symbol))
 # select gene
-genes <- c('Tnfaip8','Serpinb1a','Apoe','Rbm3','Cd72', 'Cd24a','Nacc2','Zcchc18',
-           'Id3','Asph','Gimap7','Cdc25b','Slfn1','Nfkb1')
-genes <-c('Apoe',
-          'Serpinb1a',
-          'Rbm3',
-          'C130026I21Rik',
-          'Rcn3',
-          'Tnfaip8',
-          'Cd72',
-          'D10Wsu102e',
-          'Vars',
-          'Cd24a',
-          'Tg',
-          'AI427809',
-          'Marcksl1',
-          'St3gal6',
-          'Nacc2',
-          'Zcchc18',
-          'Id3',
-          'Asph',
-          'Nfkb1',
-          'Man1a',
-          'Gimap3',
-          'Cyp11a1',
-          'Myo1e',
-          'Gimap7',
-          'Krt222',
-          'Gimap4',
-          'Cdc25b',
-          'Slfn1')
-genes <-c('Stat1',
-          'Tgtp2',
-          'Pik3r1',
-          'Asph',
-          'Map3k5',
-          'Bcl2l1',
-          'Apoe',
-          'Cyp11a1',
-          'Cpt1a',
-          'Cybb',
-          'Tnfrsf1a3b',
-          'Hmgb3',
-          'Pglyrp1',
-          'Rabgef1',
-          'Twsg1',
-          'Lck',
-          'Ikzf3',
-          'Cd24a',
-          'Ctla4',
-          'Nfkb1',
-          'Nt5e',
-          'Irf1',
-          'Slamf1',
-          'Tnfaip8',
-          'Gimap3',
-          'Id3',
-          'Gimap7',
-          'Stk3',
-          'Tnfsf8',
-          'Zcchc18',
-          'Krt222',
-          'Gm8369',
-          'Unc119',
-          'Slfn1',
-          'Nacc2',
-          'Cd72',
-          'Myo1e',
-          'Man1a',
-          'Cdc25b',
-          'Hmgb3',
-          'Twsg1',
-          'Bcl2l1',
-          'Pglyrp1',
-          'Serpinb1a',
-          'Pik3ap1',
-          'Themis2',
-          'Laptm5',
-          'Asph',
-          'Cd200',
-          'Irf8',
-          'Irf1',
-          'Fcgr4')
+genes <- c()
 # plot
 p <- VolcanoPlot(dif2, padj=0.05, title=title, label.max = 40, label.symbols = genes,log2FC = 1,cols=c('#FFA500', '#FF4500'))
 ggsave('./plot_out/Volcano_OF_YF_WT.pdf', p, width = 10, height = 10, dpi = 600)
