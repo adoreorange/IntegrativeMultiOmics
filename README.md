@@ -76,24 +76,27 @@ AnaCode/
 
 **功能定位**：单细胞水平基因表达分析，解析细胞异质性
 
-**主要脚本**：
-| 脚本 | 功能描述 |
-|------|----------|
-| `1-QC_2-harmony.R` | 数据质控与批次效应校正 (Harmony) |
-| `3-celltype.R` | 细胞类型鉴定 |
-| `4-B.R`, `5-B1.R`, `6-B2.R` | 细胞亚群分析 |
-| `7-DEG.R` | 差异表达基因分析 |
-| `B1_immunarch.R`, `B2_immunarch.R` | 免疫组库分析 |
-| `gsva.R` | GSVA功能富集分析 |
-| `heatmap_plot.R`, `Heat_Dot_data.R` | 热图与点图可视化 |
-| `sc_bulk_female_GO_up.R` | 拟 bulk 分析 |
+**分析流程**：
+| 步骤 | 脚本 | 功能描述 |
+|------|------|----------|
+| 0 | `0-cellranger_count.sh` | Cell Ranger 原始输出 |
+| 1 | `1-QC&2-harmony.R` | 数据质控与批次效应校正 (Harmony) |
+| 3 | `3-celltype.R` | 细胞类型鉴定 |
+| 4-6 | `4-B.R`, `5-B1.R`, `6-B2.R` | 细胞亚群分析 |
+| 7 | `7-DEG.R` | 差异表达基因分析 |
+| 10 | `10-BCR/` | 免疫组库分析 (B1/B2_immunarch.R, B1/B2_sample_plot.R) |
+| 11 | `11-GSVA/` | GSVA功能富集分析 |
+| 12 | `12-heatmap/` | 热图与点图可视化 |
 
-**子目录**：
+**子目录说明**：
 | 目录 | 内容 |
 |------|------|
-| `8-pyscenic/` | SCENIC基因调控网络分析 (`run_pyscenic.sh`, `aucell.sh`, `csv2loom.py`) |
-| `9-pseudotime/` | 拟时序分析 (`monocle3_plot.R`, `pseudotime_based_analysis.R`) |
-| `scRNA_func_scripts/` | 功能脚本库 (`qc.R`, `harmony.R`, `myGSVA.R`, `myfindmarkers.R`, `mydimplot.R`, `mycytotrace.R`等) |
+| `8-pyscenic/` | SCENIC基因调控网络分析 |
+| `9-pseudotime/` | 拟时序分析 (Monocle3) |
+| `10-BCR/` | B细胞受体免疫组库分析 |
+| `11-GSVA/` | GSVA功能富集分析 |
+| `12-heatmap/` | 热图可视化 |
+| `scRNA_func_scripts/` | 功能脚本库 (qc.R, harmony.R, myGSVA.R, myfindmarkers.R, mydimplot.R, mycytotrace.R等) |
 
 ---
 
